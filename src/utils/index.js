@@ -22,7 +22,7 @@ class Movie {
               actor: `${this.actor}`,
             },
           };
-        return await collection.updateOne(filter, updateActor);
+        return await collection.updateOne(filter, updateActor); //apply filter then what you want to update the key to
     }
     async updateInfo(collection) {
         //filter is title as I will be searching by title
@@ -32,12 +32,13 @@ class Movie {
               optInfo: `${this.optInfo}`,
             },
           };
-        return await collection.updateOne(filter, updateInfo);
-    }
+        return await collection.updateOne(filter, updateInfo); //can do toArray() to view in terminal
+    }                                                          //or just view list --list
     async delete(collection){
         //delete using title: --delete --title"insert title here"
         const filter = {title: `${this.title}`};
-        return await collection.deleteOne(filter);
+        await collection.deleteOne(filter);
+        return "Success";
     }
     async searchTitle(collection){
         //search using title: --searchTitle --title "insert title here"
@@ -53,7 +54,7 @@ class Movie {
     async searchRating(collection){
         //search using rating: --searchRating --rating "insert rating here"
         const filter = {rating: `${this.rating}`};
-        return await collection.find(filter).toArray(); //lists array of movies with this rating
+        return await collection.find(filter).toArray(); //lists array of movies with this.rating
     }
 };
 

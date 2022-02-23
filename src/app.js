@@ -52,4 +52,4 @@ const app = async (yargsObj) => {
 
 app(yargs.argv);
 
-//crud - create, read, operate and delete
+//crud - create, read, update and delete
