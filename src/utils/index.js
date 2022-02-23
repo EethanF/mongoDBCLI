@@ -1,8 +1,9 @@
 class Movie {
-    constructor(title, actor ="not specified", optInfo = "None"){
+    constructor(title, actor ="not specified", rating = "none as of yet", optInfo = "None"){
         this.title = title;
         this.actor = actor;
         this.optInfo = optInfo;
+        this.rating = rating;
     }
     async add(collection) { //have to pass collection if i want to add something
         await collection.insertOne(this);
@@ -14,6 +15,7 @@ class Movie {
         //list all movies in the db
     }
     async updateActor(collection) {
+        //searching by title then updating actor --updateActor --title "title of movie" --actor"what actor you want to update it to"
         const filter = {title: `${this.title}`};
         const updateActor = {
             $set: { //set this key to the value I give
@@ -45,7 +47,12 @@ class Movie {
     async searchActor(collection){
         //search using actor: --searchActor --actor "insert actor name here"
         const filter = {actor: `${this.actor}`};
-        return await collection.findOne(filter)
+        return await collection.find(filter).toArray()
+    }
+    async searchRating(collection){
+        //search using rating: --searchRating --rating "insert rating here"
+        const filter = {rating: `${this.rating}`};
+        return await collection.find(filter).toArray();
     }
 };
 
