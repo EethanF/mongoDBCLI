@@ -1,5 +1,5 @@
 class Movie {
-    constructor(title, actor ="not specified", rating = "none as of yet", optInfo = "None"){
+    constructor(title, actor ="not specified", rating ="none as of yet", optInfo ="None"){
         this.title = title;
         this.actor = actor;
         this.optInfo = optInfo;
@@ -42,17 +42,18 @@ class Movie {
     async searchTitle(collection){
         //search using title: --searchTitle --title "insert title here"
         const filter = {title: `${this.title}`};
-        return await collection.findOne(filter)
+        return await collection.findOne(filter).toArray();
     }
     async searchActor(collection){
         //search using actor: --searchActor --actor "insert actor name here"
         const filter = {actor: `${this.actor}`};
         return await collection.find(filter).toArray()
+         //lists array of movies of specified actor- find movie of actor .toArray or error
     }
     async searchRating(collection){
         //search using rating: --searchRating --rating "insert rating here"
         const filter = {rating: `${this.rating}`};
-        return await collection.find(filter).toArray();
+        return await collection.find(filter).toArray(); //lists array of movies with this rating
     }
 };
 
